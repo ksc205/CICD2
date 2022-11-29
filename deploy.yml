@@ -1,21 +1,26 @@
-## 디플로이먼트
+# ./EKS/Deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-deploy
+  name: eks-deploy
 spec:
-  replicas: 3
-  selector:           # deployment - pod 대응용
+  replicas: 1
+  selector:
     matchLabels:
-      app: web
-  template:           # 여기서부터 파드 템플릿
+      app: eks
+  template:
     metadata:
       labels:
-        app: web      # 파드의 라벨
+        app: eks
     spec:
       containers:
-      - name: apache2
-        image: 053483979034.dkr.ecr.ap-northeast-2.amazonaws.com/apache2:latest
-          
-
+        - name: eks
+          image: AWS_ECR_URI
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          env:
+            - name: DATE
+              value: 'DATE_STRING'
 

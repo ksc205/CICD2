@@ -1,13 +1,14 @@
+# ./EKS/Service.yaml
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service-lb
+  name: eks-svc
 spec:
-  selector:
-    app: web
   ports:
-  - name: webserver
-    protocol: TCP
-    port: 80
+    - name: "80"
+      port: 80
+      targetPort: 80
+  selector:
+    app: eks
   type: LoadBalancer
-
